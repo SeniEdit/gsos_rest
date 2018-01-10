@@ -26,6 +26,18 @@ public class Bmi {
 	}
 	
 	public String getCategory() {
+		int r = (int) this.calcBmi();
+		if (r >= 35) {
+			this.setCategory("Morbid obese");
+		} else if (r > 30 && r < 35) {
+			this.setCategory("Obese");
+		} else if (r > 25 && r < 30) {
+			this.setCategory("Overweight");
+		} else if (r > 18.5 && r < 25) {
+			this.setCategory("Healthy");
+		} else if (r < 18.5) {
+			this.setCategory("Underweight");
+		}
 		return category;
 	}
 
@@ -38,19 +50,16 @@ public class Bmi {
  	 * 
 	 * @return      Result of BMI formula
 	 */
-	public float getBmi() {
-		float r = this.getWeight() / this.getHeight() / this.getHeight() * 10000;
-		if (r >= 35) {
-			this.setCategory("Morbid obese");
-		} else if (r > 30 && r < 35) {
-			this.setCategory("Obese");
-		} else if (r > 25 && r < 30) {
-			this.setCategory("Overweight");
-		} else if (r > 18.5 && r < 25) {
-			this.setCategory("Healthy");
-		} else if (r < 18.5) {
-			this.setCategory("Underweight");
-		}
+	public float calcBmi() {
+		float r = (float) (this.getWeight() / Math.pow(this.getHeight(), 2) * 10000);
 		return r ;
+	}
+	
+	public void setBmi(float bmi) {
+		this.bmi = bmi;
+	}
+	
+	public float getBmi() {
+		return this.calcBmi();
 	}
 }

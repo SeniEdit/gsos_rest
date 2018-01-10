@@ -21,6 +21,7 @@ public class BmiController {
 		Bmi bmi = new Bmi();
 		bmi.setHeight(height);
 		bmi.setWeight(weight);
+		bmi.calcBmi();
 		return bmi;
 	}
 }
