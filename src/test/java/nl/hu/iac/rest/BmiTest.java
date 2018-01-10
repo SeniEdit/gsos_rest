@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class BmiTest {
 	private Bmi bmi;
+	private BmiService _bmi;
 
 	@Before
 	public void setup() throws Exception {
@@ -33,7 +34,7 @@ public class BmiTest {
 		float height = 185;
 		float weight = 200;
 		float r = (float) (weight / Math.pow(height, 2) * 10000);
-		assertEquals(r, bmi.calcBmi(), 0);
+		assertEquals(r, bmi.getBmi(), 0);
 	}
 	
 	@Test
@@ -46,5 +47,17 @@ public class BmiTest {
 		bmi.setHeight(181);
 		bmi.setWeight(78);
 		assertEquals("Healthy", bmi.getCategory());
+	}
+	
+	@Test
+	public void testIntegrationWithBmiService() {
+		/* Berekent BMI in het metrisch systeem */
+		float height = 185;
+		float weight = 200;
+		float r = (float) (weight / Math.pow(height, 2) * 10000);
+		Bmi bmi_1 = new Bmi();
+		bmi_1.setWeight(weight);
+		bmi_1.setHeight(height);
+		assertEquals(r, this._bmi.calcBmi(bmi_1), 0);
 	}
 }

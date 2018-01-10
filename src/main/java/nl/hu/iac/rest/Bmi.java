@@ -1,6 +1,7 @@
 package nl.hu.iac.rest;
 
 public class Bmi {
+	private BmiService _bmi = new BmiService();
 	private float height = 0;
 	private float weight = 0;
 	private float bmi = 0;
@@ -26,7 +27,7 @@ public class Bmi {
 	}
 	
 	public String getCategory() {
-		int r = (int) this.calcBmi();
+		int r = (int) this.getBmi();
 		if (r >= 35) {
 			this.setCategory("Morbid obese");
 		} else if (r > 30 && r < 35) {
@@ -45,21 +46,11 @@ public class Bmi {
 		this.category = category;
 	}
 	
-	/**
-	 * Returns BMI in metric (weight in kg / height in cm / height in cm * 10000)
- 	 * 
-	 * @return      Result of BMI formula
-	 */
-	public float calcBmi() {
-		float r = (float) (this.getWeight() / Math.pow(this.getHeight(), 2) * 10000);
-		return r ;
-	}
-	
 	public void setBmi(float bmi) {
 		this.bmi = bmi;
 	}
 	
 	public float getBmi() {
-		return this.calcBmi();
+		return this._bmi.calcBmi(this);
 	}
 }
